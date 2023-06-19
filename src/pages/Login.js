@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { saveUser } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -20,9 +21,15 @@ class Login extends React.Component {
     );
   };
 
-  render() {
-    const minSenha = 6;
+  handleButtonClick = () => {
     const { history, dispatch } = this.props;
+    const { email } = this.state;
+    dispatch(saveUser(email));
+    history.push('/carteira');
+  };
+
+  render() {
+    const minSenha = 5;
     const { email, password, isValidEmail } = this.state;
     return (
       <div>
@@ -42,7 +49,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
           <button
-            onClick={ () => dispatch(() => history.push('/carteira')) }
+            onClick={ this.handleButtonClick }
             disabled={ !(password.length > minSenha && isValidEmail) }
           >
             Entrar
@@ -55,8 +62,10 @@ class Login extends React.Component {
   }
 }
 Login.propTypes = {
-  history: PropTypes.shape(),
-  dispatch: PropTypes.func,
-}.isRequired;
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(Login);
