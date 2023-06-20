@@ -21,7 +21,8 @@ class Login extends React.Component {
     );
   };
 
-  handleButtonClick = () => {
+  handleButtonClick = (e) => {
+    e.preventDefault();
     const { history, dispatch } = this.props;
     const { email } = this.state;
     dispatch(saveUser(email));

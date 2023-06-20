@@ -1,5 +1,4 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { WALLET_USER_SUBMIT } from '../actions';
+import { WALLET_USER_SUBMIT, EXPENSES_USER_SUBMIT } from '../actions';
 
 const initialState = {
 
@@ -10,13 +9,21 @@ const initialState = {
 
 };
 
-const despesasWallet = (state = initialState, action) => {
+const wallet = (state = initialState, action) => {
+  const lastExpense = state.expenses[state.expenses.length - 1]
+    ? state.expenses[state.expenses.length - 1].id + 1 : 0;
+  const expense = {
+    id: lastExpense,
+    ...action.payload,
+  };
   switch (action.type) {
   case WALLET_USER_SUBMIT:
     return { ...state, currencies: action.currencies };
+  case EXPENSES_USER_SUBMIT:
+    return { ...state, expenses: [...state.expenses, expense] };
   default:
     return state;
   }
 };
 
-export default despesasWallet;
+export default wallet;
