@@ -1,4 +1,7 @@
-import { WALLET_USER_SUBMIT, EXPENSES_USER_SUBMIT } from '../actions';
+import { WALLET_USER_SUBMIT, EXPENSES_USER_SUBMIT, DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  EDIT_DESPESAS,
+  EDIT_TO_EXPENSE } from '../actions';
 
 const initialState = {
 
@@ -6,6 +9,7 @@ const initialState = {
   expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
   editor: false, // valor booleano que indica de uma despesa está sendo editada
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
+  toexpenses: [],
 
 };
 
@@ -21,6 +25,21 @@ const wallet = (state = initialState, action) => {
     return { ...state, currencies: action.currencies };
   case EXPENSES_USER_SUBMIT:
     return { ...state, expenses: [...state.expenses, expense] };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expensess) => expensess.id !== action.id),
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state, editor: action.editor };
+  case EDIT_TO_EXPENSE:
+    return {
+      ...state, idToEdit: action.idToEdit };
+  case EDIT_DESPESAS:
+    return {
+      ...state, toexpenses: [...state.toexpenses, expense],
+    };
   default:
     return state;
   }

@@ -57,9 +57,22 @@ class WalletForm extends Component {
     });
   };
 
+  handleEditClick = () => {
+    const { dispatch } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    const expense = {
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    };
+    dispatch(expenses);
+  };
+
   render() {
     const { value, description, currency, method, tag } = this.state;
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     return (
       <section>
         <div>
@@ -113,9 +126,9 @@ class WalletForm extends Component {
               <option>Saúde</option>
             </select>
             <button
-              onClick={ this.handleButtonClick }
+              onClick={ editor ? this.handleEditClick : this.handleButtonClick }
             >
-              Adicionar despesa
+              {editor ? 'Editar despesa' : 'Adicionar despesas'}
 
             </button>
           </form>
@@ -132,6 +145,7 @@ const mapStateToProps = (state) => ({
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(WalletForm);

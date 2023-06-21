@@ -11,7 +11,7 @@ class Header extends Component {
     });
 
     return ask.length > 0
-      ? ask.reduce((acumulador, item) => acumulador + item).toFixed(2) : 0;
+      ? ask.reduce((acumulador, item) => acumulador + item).toFixed(2) : '0.00';
   };
 
   render() {
@@ -43,6 +43,6 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 export default connect(mapStateToProps)(Header);
