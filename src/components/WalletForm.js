@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrencies, addExpenses } from '../redux/actions';
+import { fetchCurrencies, addExpenses, editDespesas } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -67,7 +67,7 @@ class WalletForm extends Component {
       method,
       tag,
     };
-    dispatch(expenses);
+    dispatch(editDespesas(expense));
   };
 
   render() {
