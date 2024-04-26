@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable react/jsx-max-depth */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -105,63 +107,128 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = this.state;
     const { currencies, editor } = this.props;
     return (
-      <section>
-        <div>
+      <section
+        className="w-full px-10 bg-null"
+      >
+        <div className=" flex items-center justify-center ">
           <form>
-            <input
-              data-testid="value-input"
-              label="Valor: "
-              type="number"
-              value={ value }
-              name="value"
-              onChange={ this.handleChange }
-            />
-            <input
-              data-testid="description-input"
-              label="Descrição: "
-              type="text"
-              value={ description }
-              name="description"
-              onChange={ this.handleChange }
-            />
-            <select
-              data-testid="currency-input"
-              name="currency"
-              value={ currency }
-              onChange={ this.handleChange }
-            >
-              {currencies.map((walletCurrency) => (
-                <option key={ walletCurrency }>{walletCurrency}</option>
-              ))}
-            </select>
-            <select
-              data-testid="method-input"
-              value={ method }
-              name="method"
-              onChange={ this.handleChange }
-            >
-              <option>Dinheiro</option>
-              <option>Cartão de crédito</option>
-              <option>Cartão de débito</option>
-            </select>
-            <select
-              data-testid="tag-input"
-              value={ tag }
-              name="tag"
-              onChange={ this.handleChange }
-            >
-              <option>Alimentação</option>
-              <option>Lazer</option>
-              <option>Trabalho</option>
-              <option>Transporte</option>
-              <option>Saúde</option>
-            </select>
-            <button
-              onClick={ editor ? this.handleEditClick : this.handleButtonClick }
-            >
-              {editor ? 'Editar despesa' : 'Adicionar despesas'}
+            <div className="flex">
+              <div className="flex w-full mt-6">
+                <label
+                  htmlFor="description"
+                  className="whitespace-nowrap text-azul mt-1 mr-1"
+                >
+                  Descrição da despesa:
+                </label>
+                <input
+                  className="block w-30 px-2 py-1 text-azul
+               placeholder-gray-500 bg-white border border-azul rounded-lg text-azul"
+                  data-testid="description-input"
+                  label="Descrição: "
+                  type="text"
+                  value={ description }
+                  name="description"
+                  onChange={ this.handleChange }
+                />
+              </div>
+              <div className="flex">
+                <label
+                  htmlFor="tag"
+                  className="whitespace-nowrap ml-10 mt-7 text-azul"
+                >
+                  Categoria da despesa
+                </label>
+                <select
+                  className="px-1 py-1 text-azul ml-2 mt-6 bg-white border rounded-lg
+                  border-azul"
+                  data-testid="tag-input"
+                  value={ tag }
+                  name="tag"
+                  onChange={ this.handleChange }
+                >
+                  <option className="text-azul">Alimentação</option>
+                  <option className="text-azul">Lazer</option>
+                  <option className="text-azul">Trabalho</option>
+                  <option className="text-azul">Transporte</option>
+                  <option className="text-azul">Saúde</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex">
 
-            </button>
+              <div className="flex w-full mt-6">
+                <label
+                  htmlFor="value"
+                  className="whitespace-nowrap mt-1 mr-2 text-azul"
+                >
+                  Valor:
+                </label>
+                <input
+                  className="block w-24 px-2 py-1
+              placeholder-gray-500 bg-white border rounded-lg text-azul border-azul"
+                  data-testid="value-input"
+                  label="Valor: "
+                  type="number"
+                  value={ value }
+                  name="value"
+                  onChange={ this.handleChange }
+                />
+              </div>
+
+              <div className="flex mr-8">
+                <label
+                  htmlFor="method"
+                  className="whitespace-nowrap mt-7 text-azul"
+                >
+                  Método de pagamento
+                </label>
+                <select
+                  className="px-1 py-1  ml-2 mt-6 bg-white border rounded-lg
+                   border-azul text-azul"
+                  data-testid="method-input"
+                  value={ method }
+                  name="method"
+                  onChange={ this.handleChange }
+                >
+                  <option>Dinheiro</option>
+                  <option>Cartão de crédito</option>
+                  <option>Cartão de débito</option>
+                </select>
+              </div>
+              <div className="flex">
+                <label
+                  htmlFor="currency"
+                  className="whitespace-nowrap ml-10 mt-7 text-azul"
+                >
+                  Moeda:
+                </label>
+                <select
+                  className="px-1 py-1 ml-2 mt-6 bg-white border rounded-lg
+                  border-azul text-azul"
+                  data-testid="currency-input"
+                  name="currency"
+                  value={ currency }
+                  onChange={ this.handleChange }
+                >
+                  {currencies.map((walletCurrency) => (
+                    <option key={ walletCurrency }>{walletCurrency}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="flex items-center justify-center mt-8">
+
+              <button
+                className="px-12 py-2 mb-6 text-sm font-medium tracking-wide text-white
+            capitalize transition-colors duration-300 transform bg-verde rounded-lg
+             hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300
+             focus:ring-opacity-50"
+                onClick={ editor ? this.handleEditClick : this.handleButtonClick }
+              >
+                {editor ? 'Editar despesa' : 'Adicionar despesas'}
+
+              </button>
+            </div>
           </form>
         </div>
       </section>
